@@ -18,6 +18,8 @@ package org.magnum.dataup;
  */
 
 
+import java.io.IOException;
+
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.boot.SpringApplication;
@@ -62,5 +64,17 @@ public class Application {
 		// Return the configuration to setup multipart in the container
 		return factory.createMultipartConfig();
 	}
+	
+	@Bean
+    public VideoFileManager videoFileManager() {
+        VideoFileManager fileManager = null;
 
+        try {
+            fileManager = VideoFileManager.get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileManager;
+    }
 }
